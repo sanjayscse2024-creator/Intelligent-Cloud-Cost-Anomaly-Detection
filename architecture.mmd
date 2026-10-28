@@ -1,0 +1,16 @@
+flowchart LR
+    U[CSV / Excel billing export] --> V[Schema validation\nerrors + duplicate detection]
+    V --> N[Normalization + daily aggregation]
+    N --> B[Baselines\nprevious period / rolling / median-MAD]
+    B --> D[Anomaly detection\nspike / drop / deviation]
+    D --> E[Evidence + safe recommendations]
+    D --> A[Alerts, acknowledgement, notes]
+    N --> C[Cost drivers\nservice / project / region]
+    N --> R[Usage vs rate analysis]
+    D --> X[CSV / JSON audit exports]
+    V --> DB[(SQLite persistence)]
+    D --> DB
+    A --> DB
+    DB --> S[Streamlit dashboard]
+    C --> S
+    R --> S
